@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button class="round" color="light" slot="start" [routerLink]="['/folder/Inbox']">
+      Close
+    </ion-button>
+    <ion-title>{{ folder }}</ion-title>
+    <ion-button class="round" color="success" slot="end" (click)="sendMail()">
+      Send
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+  <div id="email">
+    <ion-list>
+      <ion-item> 
+        <ion-row class="container">
+          <ion-col size-xs="2">
+            <ion-label>To:</ion-label> 
+          </ion-col>
+          <ion-col [attr.width-20]="show ? true : null" size-xs="10">
+            <ion-item *ngFor="let to of toList" class="toList" lines="none">
+              <ion-thumbnail *ngIf="show" slot="start" style="width:auto;">
+                <ion-img [src]="to.Avatar" style="width:25px;height:25px;float:left;"></ion-img>
+                <span style="float:right;padding:5px;">{{to.FirstName}} {{to.LastName}}</span>
+              </ion-thumbnail>
+            </ion-item>
+          </ion-col>
+          <ion-col size-xs="10">
+            <ion-searchbar class="search-size" placeholder="" [(ngModel)]="searchTerm" (ionChange)="contactSearch($event)">
+            </ion-searchbar>
+          </ion-col>
+          <ion-col size-xs="2" *ngIf="show">
+            <span><ion-icon name="trash" (click)="removeContact()"></ion-icon></span>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item *ngIf="showList">
+        <ion-list lines="none">
+          <ion-item *ngFor="let i of users" class="item-color" (click)="assignContact(i)">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="i.Avatar"></ion-img>
+            </ion-thumbnail>
+            {{ i.FirstName }} {{i.LastName}}<br/>
+            {{i.Email}}
+          </ion-item>
+        </ion-list>
+      </ion-item>
+      <ion-item margin-bottom> 
+        <ion-label>Cc/Bcc: </ion-label> 
+        <ion-input type="email" [(ngModel)]="cc"></ion-input> 
+      </ion-item>
+      <ion-item margin-bottom> 
+        <ion-label>Subject:</ion-label> 
+        <ion-input type="string" style="font-weight:bold;" [(ngModel)]="subject"></ion-input> 
+        <span ion-button color="primary" text-center block (click)="attachFile()">
+          <ion-icon name="attach-outline"></ion-icon>
+        </span> 
+      </ion-item>
+      <div style="overflow-y:scroll;" *ngIf="attachment">
+        <ion-item *ngFor="let item of files">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="item.File"></ion-img>
+          </ion-thumbnail>
+          <ion-label>{{item.Name}}</ion-label>
+        </ion-item>
+      </div>     
+    </ion-list>
+    <ion-textarea auto-grow="true" [(ngModel)]="msg" style="height:100%;"></ion-textarea>  
+  </div>
+</ion-content>

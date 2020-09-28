@@ -1,0 +1,40 @@
+ .round {
+  --border-radius: 3px;
+  --vertical-align: middle;
+  --padding: 20px;
+}
+
+ion-toolbar{
+  padding: 0px 10px;
+}
+
+ion-list{
+width:100%;
+}
+
+ion-searchbar {
+  --icon-color: #fff; 
+  --box-shadow: transparent;
+  --margin-left:0px;
+}
+
+.container {
+  display: flex !important;
+  vertical-align: middle !important;
+}
+
+.search-size{
+  width:100%;
+}
+
+.toList{
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  height:30px;
+}
+
+.item-color{
+  background-color: gainsboro;
+}

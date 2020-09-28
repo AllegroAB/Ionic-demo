@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bgcolor">
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-title align="center">{{ folder }}</ion-title>
+    <ion-button slot="end" class="round" [routerLink]="['/create']" color="success">
+      <ion-icon name="pencil"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container" *ngIf="inbox">
+    <ion-list *ngFor="let item of sentItems" class="pad">
+      <div style="float:left;" class="vertical-center">
+        <ion-icon name="ellipse" *ngIf="unread"></ion-icon>
+      </div>
+      <div style="float:left;" class="spaces"> 
+        <span class="pad">
+          <b *ngFor="let i of item.to; let y = index;">{{i.FirstName === user ? "me" : i.FirstName}} {{i.FirstName === user ? "" : i.LastName}}{{y === item.to.length -1 ? '' : ',&nbsp;' }}</b>
+          <ion-icon class="attach" name="attach-outline" *ngIf="item.attachments != null ? true : null" (click)="showAttachment(item.attachments[0].File, item.attachments[0].Name)"></ion-icon>
+        </span>
+        <ion-item lines="none"><b>{{item.subject}}</b></ion-item>
+        <ion-item (click)="showThread(item)">{{item.message}}</ion-item>
+      </div>
+    </ion-list>
+  </div>
+
+  <div id="container" *ngIf="others">
+    <strong class="capitalize">{{ folder }}</strong>
+    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div>
+</ion-content>
