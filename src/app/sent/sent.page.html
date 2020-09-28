@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bgcolor">
+    <ion-button class="round" color="light" slot="start" [routerLink]="['/folder/Inbox']">
+      Inbox
+    </ion-button>
+    <ion-icon class="big" name="trash" slot="end" (click)="removeContact()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">  
+  <ion-list>
+    <ion-item color="light">
+      {{messages.subject}}
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="messages.attachments[0].File"></ion-img>
+      </ion-thumbnail>
+      <div>
+        <ion-row><b>{{messages.from}}</b></ion-row>
+        <ion-row>{{messages.message}}</ion-row>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
