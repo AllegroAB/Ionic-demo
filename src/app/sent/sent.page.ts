@@ -17,6 +17,7 @@ export class SentPage implements OnInit {
   }
 
   getMessage(){
+    // get the selected mail thread 
     this.messages = JSON.parse(localStorage.getItem("message"));
   }
 
