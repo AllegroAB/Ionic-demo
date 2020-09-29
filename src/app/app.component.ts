@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    // setting user locally
     var name = "Matte";
     localStorage.setItem("user",JSON.stringify(name));
   }
