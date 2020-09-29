@@ -42,6 +42,7 @@ export class CreatePage implements OnInit {
   ngOnInit() {
   }
 
+   // method to pick photo from gallery
   attachFile(){ 
     this.attachment = true;
     this.imagePicker.getPictures({
@@ -52,6 +53,7 @@ export class CreatePage implements OnInit {
     });
   }
 
+  // assigns selected contact in the "To:" field
   assignContact(user){
     this.searchTerm = "";
     this.toList.push(user);
@@ -60,6 +62,7 @@ export class CreatePage implements OnInit {
     this.sentTime = new Date();
   }
 
+  // remove assigned contact
   removeContact(){
     this.toList.splice(-1,1);
     if(this.toList.length >= 1)
@@ -68,6 +71,7 @@ export class CreatePage implements OnInit {
       this.show = false;
   }
 
+  // send mail to the recipients
   sendMail(){
     this.sentItems.push({
       from:JSON.parse(localStorage.getItem("user")),
@@ -78,12 +82,15 @@ export class CreatePage implements OnInit {
       cc:this.cc,
       time:new Date()
     });
+    
+    // saving the mail contents locally
     localStorage.setItem("sent",JSON.stringify(this.sentItems));
     if(this.sentItems.subject != "" || this.sentItems.subject != null){
       this.navCtrl.navigateForward('/folder/Inbox');
     }
   }
 
+  // search and filter contacts
   contactSearch(ev: CustomEvent) {
     const val = ev.detail.value;
   
